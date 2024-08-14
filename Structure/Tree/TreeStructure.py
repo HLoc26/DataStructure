@@ -57,7 +57,7 @@ class Tree():
 
     # Searching
     # BFS: use queue, pop at front to check
-    def BFS(self, target: str) -> bool:
+    def BFS(self, target: str) -> list:
         trace: list[str] = []
         queue: list[TreeNode] = []
         queue.append(self.root)
@@ -67,13 +67,11 @@ class Tree():
             trace.append(node.nodeName)
             queue += node.children
             if node.nodeName == target:
-                print(trace)
-                return True
-        print(trace)
-        return False
+                return [True, trace]
+        return [False, None]
     
     # DFS: use stack, pop at the end to check
-    def DFS(self, target: str) -> bool:
+    def DFS(self, target: str) -> list:
         trace: list[str] = []
         stack: list[TreeNode] = []
         stack.append(self.root)
@@ -83,10 +81,8 @@ class Tree():
             trace.append(node.nodeName)
             stack += node.children
             if node.nodeName == target:
-                print(trace)
-                return True
-        print(trace)
-        return False
+                return [True, trace]
+        return [False, None]
 
     
 
@@ -115,3 +111,7 @@ tree.AddChildren(tree.root.children[1], TreeNode("H"))
 # Add node to node D
 tree.AddChildren(tree.root.children[2], TreeNode("I"))
 tree.AddChildren(tree.root.children[2], TreeNode("J"))
+
+
+print(tree.BFS("J"))
+print(tree.BFS("J"))
