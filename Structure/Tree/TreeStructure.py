@@ -17,8 +17,35 @@ class Tree():
     def GetChildrenNode(self, parent: TreeNode) -> list:
         return parent.children
 
-    def RenameNode():
-        pass
+    def RenameNode(self, target: str) -> bool:
+        '''Return True if successfully renamed, otherwise False'''
+        # Use DFS to find
+
+        
+    
+    # Getting nodes
+    # Get root
+    def GetRoot(self) -> TreeNode:
+        return self.root
+    # Get sibblings
+    def GetSibblings(self, target: str) -> list[TreeNode]:
+        deque: list[TreeNode] = []
+        deque.append(self.root)
+        while deque:
+            parent = deque.pop(0)
+            nodeChildren = parent.children
+            childrenCount = len(nodeChildren)
+            deque.extend(nodeChildren)
+            while childrenCount > 0:
+                child = deque.pop()
+                if child.nodeName == target:
+                    return nodeChildren
+                else:
+                    deque.extend(child.children)
+                childrenCount -= 1
+        return None
+
+    # Get ancestors
 
     # Searching
     # BFS: use queue, pop at front to check
@@ -28,7 +55,7 @@ class Tree():
         queue.append(self.root)
 
         while queue:
-            node = queue.pop(0) # difference here
+            node = queue.pop(0) # different to DFS here
             trace.append(node.nodeName)
             queue += node.children
             if node.nodeName == target:
