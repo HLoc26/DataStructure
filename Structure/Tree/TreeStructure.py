@@ -17,10 +17,18 @@ class Tree():
     def GetChildrenNode(self, parent: TreeNode) -> list:
         return parent.children
 
-    def RenameNode(self, target: str) -> bool:
+    def RenameNode(self, target: str, newName: str) -> bool:
         '''Return True if successfully renamed, otherwise False'''
         # Use DFS to find
-
+        stack: list[TreeNode] = []
+        stack.append(self.root)
+        while stack:
+            currNode = stack.pop()
+            stack.extend(currNode.children)
+            if currNode.nodeName == target:
+                currNode.nodeName = newName
+                return True
+        return False
         
     
     # Getting nodes
