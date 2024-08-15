@@ -1,0 +1,5 @@
+test.*
+tempCodeRunnerFile.*
+*.inp
+*.out
+__pycache__
