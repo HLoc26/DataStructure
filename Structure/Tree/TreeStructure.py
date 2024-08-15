@@ -54,17 +54,32 @@ class Tree():
         return None
 
     # Get ancestors
+    def GetAncestors(self, target: str) -> list[TreeNode]:
+        ancestors = []
+    
+        def dfs(node: TreeNode) -> bool:
+            for child in node.children:
+                if child.nodeName == target:
+                    ancestors.append(node)
+                    return True
+                if dfs(child):
+                    ancestors.append(node)
+                    return True
+            return False
+
+        dfs(self.root)
+        return ancestors[::-1]
 
     # Searching
     # BFS: use queue, pop at front to check
     def BFS(self, target: str) -> list:
-        trace: list[str] = []
+        trace: list[TreeNode] = []
         queue: list[TreeNode] = []
         queue.append(self.root)
 
         while queue:
             node = queue.pop(0) # different to DFS here
-            trace.append(node.nodeName)
+            trace.append(node)
             queue += node.children
             if node.nodeName == target:
                 return [True, trace]
@@ -72,13 +87,13 @@ class Tree():
     
     # DFS: use stack, pop at the end to check
     def DFS(self, target: str) -> list:
-        trace: list[str] = []
+        trace: list[TreeNode] = []
         stack: list[TreeNode] = []
         stack.append(self.root)
 
         while stack:
             node = stack.pop() # difference here, 
-            trace.append(node.nodeName)
+            trace.append(node)
             stack += node.children
             if node.nodeName == target:
                 return [True, trace]

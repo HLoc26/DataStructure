@@ -28,7 +28,4 @@ tree.AddChildren(tree.root.children[2], TreeNode("I"))
 tree.AddChildren(tree.root.children[2], TreeNode("J"))
 
 
-print(tree.BFS("J"))
-tree.RenameNode("J", "newJ")
-print(tree.BFS("J"))
-print(tree.BFS("newJ"))
+print(tree.GetAncestors("J"))
