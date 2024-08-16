@@ -5,3 +5,6 @@ class Node():
 
     def __repr__(self) -> str:
         return self.data
+    
+    def __str__(self) -> str:
+        return str(self.data)

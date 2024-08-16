@@ -4,6 +4,14 @@ class SinglyLinkedList():
         self.head = None
         self.length = 0
 
+    def __repr__(self) -> str:
+        res = ""
+        curNode = self.head
+        while curNode != None:
+            res+= f"{curNode} -> "
+            curNode = curNode.next
+        res += "NULL"
+        return res
     # Traversal (print)
     def PrintList(self) -> None:
         curNode = self.head
@@ -96,6 +104,7 @@ class SinglyLinkedList():
         target = curNode.next
         target.data = None
         curNode.next = curNode.next.next
+        self.length -= 1
         del target
         return self.head
     
@@ -113,3 +122,23 @@ class SinglyLinkedList():
         
         self.head = prevNode
         return self.head
+
+    def Rotate(self, k: int) -> Node:
+        '''Keep the kth first nodes, move the other nodes to front'''
+        if k >= self.length:
+            return Node
+        
+        curNode = self.head
+        newLastNode = None
+        curPos = 0
+        while curNode.next != None:
+            if curPos+1 == k:
+                newLastNode = curNode
+            curNode = curNode.next
+            curPos += 1
+        newHead = newLastNode.next
+        curNode.next = self.head
+        newLastNode.next = None
+        self.head = newHead
+        return self.head
+
