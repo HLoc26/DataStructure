@@ -98,3 +98,18 @@ class SinglyLinkedList():
         curNode.next = curNode.next.next
         del target
         return self.head
+    
+    # Reverse a singly linked list
+    def Reversed(self) -> Node:
+        curNode = self.head
+        prevNode = None
+
+        while curNode != None:
+            nextNode = curNode.next
+
+            curNode.next = prevNode
+            prevNode = curNode
+            curNode = nextNode
+        
+        self.head = prevNode
+        return self.head

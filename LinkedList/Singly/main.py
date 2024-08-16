@@ -10,10 +10,5 @@ l.InsertEnd("F")
 l.InsertEnd("G")
 
 l.PrintList()
-
-l.InsertAt(3, "D")
-
-l.DeleteAt(3)
-
+l.Reversed()
 l.PrintList()
-
