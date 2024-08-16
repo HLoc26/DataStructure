@@ -1,4 +1,3 @@
-from typing import Any
 from Node import Node
 class SinglyLinkedList():
     def __init__(self) -> None:
@@ -12,6 +11,7 @@ class SinglyLinkedList():
             print(f"{curNode} ->", end=' ')
             curNode = curNode.next
         print("NULL")
+
     # Insertion
     # At the beginning
     def InsertHead(self, data: object) -> Node:
@@ -55,5 +55,46 @@ class SinglyLinkedList():
         curNode.next = newNode
         return newNode
         
-
-
+    # Deletion
+    # Delete head
+    def DeleteHead(self) -> Node:
+        if self.head == None:
+            return None
+        head = self.head
+        head.data = None
+        self.head = head.next
+        del head
+        self.length -= 1
+        return self.head
+    
+    # Delete end
+    def DeleteEnd(self) -> Node:
+        if self.head == None:
+            return None
+        curNode = self.head
+        while curNode.next.next != None:
+            curNode = curNode.next
+        tail = curNode.next
+        tail.data = None
+        curNode.next = None
+        del tail
+        self.length -= 1
+        return self.head
+    
+    # Delete at a specific position
+    def DeleteAt(self, position: int) -> Node:
+        '''0-indexed, meaning head is at position 0'''
+        if position >= self.length:
+            return self.DeleteEnd()
+        if position == 0:
+            return self.DeleteHead()
+        curPos = 0
+        curNode = self.head
+        while curPos + 1 != position and curNode.next != None:
+            curPos+=1
+            curNode = curNode.next
+        target = curNode.next
+        target.data = None
+        curNode.next = curNode.next.next
+        del target
+        return self.head
