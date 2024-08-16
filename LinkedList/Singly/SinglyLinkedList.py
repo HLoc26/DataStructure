@@ -142,3 +142,22 @@ class SinglyLinkedList():
         self.head = newHead
         return self.head
 
+    def IsPalindrome(self) -> bool:
+        stack: list[Node] = []
+        curNode = self.head
+        
+        while curNode != None:
+            stack.append(curNode)
+            curNode = curNode.next
+
+        curNode = self.head
+        i = self.length - 1
+        while i > self.length // 2:
+            last = stack.pop(i)
+            if curNode.data != last.data:
+                print(curNode.data, last.data)
+                return False
+            i-=1
+            curNode = curNode.next
+        return True
+    
