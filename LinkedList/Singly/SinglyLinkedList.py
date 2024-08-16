@@ -7,7 +7,7 @@ class SinglyLinkedList():
     # Traversal (print)
     def PrintList(self) -> None:
         curNode = self.head
-        while curNode.next != None:
+        while curNode != None:
             print(f"{curNode} ->", end=' ')
             curNode = curNode.next
         print("NULL")
