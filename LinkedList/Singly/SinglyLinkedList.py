@@ -161,3 +161,32 @@ class SinglyLinkedList():
             curNode = curNode.next
         return True
     
+    def DetectLoop(self) -> Node:
+        '''Returns None if there is no loop, otherwise returns the start of the loop'''
+        # Use Floyd's algorithm
+        slow = fast = self.head
+
+        while slow != None and fast != None and fast.next != None:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                break
+        # There is no loop, return None
+        if slow != fast:
+            return None
+        # Find the start of loop
+        slow = self.head
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
+        return slow
+    
+    def RemoveLoop(self) -> Node:
+        start = self.DetectLoop()
+        if start == None:
+            return None
+        cur = start.next
+        while cur.next != start:
+            cur = cur.next
+        cur.next = None
+        return self.head
