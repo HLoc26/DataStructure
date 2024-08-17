@@ -1,12 +1,10 @@
-from TreeNode import TreeNode
-from TreeStructure import Tree
 from BinaryNode import BinaryNode
-class BinaryTree(Tree):
+class BinaryTree():
     def __init__(self, rootName: str) -> None:
-        super().__init__(rootName)
         self.root = BinaryNode(rootName)
+        self.nodeCount = 1
     
-    def AddChildren(self, parent: TreeNode, newChild: TreeNode) -> None:
+    def AddChildren(self, parent, newChild) -> None:
         raise NotImplementedError("BinaryTree class can only use AddLeftChild() or AddRightChild() to insert")
 
     def AddLeftChild(self, parent: BinaryNode, child: BinaryNode) -> None:
@@ -15,14 +13,14 @@ class BinaryTree(Tree):
             parent.children.insert(0, child)
             self.nodeCount += 1
         else:
-            raise KeyError(f"Error add child {child.nodeName} to the left of {parent.nodeName} (left node already exist)")
+            raise KeyError(f"Error add child {child.data} to the left of {parent.data} (left node already exist)")
     def AddRightChild(self, parent: BinaryNode, child: BinaryNode) -> None:
         if parent.rightNode == None:
             parent.rightNode = child
             parent.children.append(child)
             self.nodeCount += 1
         else:
-            raise KeyError(f"Error add child {child.nodeName} to the right of {parent.nodeName} (right node already exist)")
+            raise KeyError(f"Error add child {child.data} to the right of {parent.data} (right node already exist)")
 
     # Traversal
     # Inorder
@@ -32,7 +30,7 @@ class BinaryTree(Tree):
         result = []        
         if startNode.leftNode:
             result.extend(self.Traverse_Inorder(startNode.leftNode))
-        result.append(startNode.nodeName)
+        result.append(startNode.data)
         if startNode.rightNode:
             result.extend(self.Traverse_Inorder(startNode.rightNode))
         return result
@@ -41,7 +39,7 @@ class BinaryTree(Tree):
         if startNode == None:
             startNode = self.root
         result = []        
-        result.append(startNode.nodeName)
+        result.append(startNode.data)
         if startNode.leftNode:
             result.extend(self.Traverse_Preorder(startNode.leftNode))
         if startNode.rightNode:
@@ -56,9 +54,28 @@ class BinaryTree(Tree):
             result.extend(self.Traverse_Postorder(startNode.leftNode))
         if startNode.rightNode:
             result.extend(self.Traverse_Postorder(startNode.rightNode))
-        result.append(startNode.nodeName)
+        result.append(startNode.data)
         return result
 
+    def print_2d(self):
+        COUNT = [5]  # You can adjust this value to change the spacing
+
+        def print_2d_util(node, space):
+            if node is None:
+                return
+
+            space += COUNT[0]
+
+            print_2d_util(node.rightNode, space)
+
+            print()
+            for i in range(COUNT[0], space):
+                print(end=" ")
+            print(node.data)
+
+            print_2d_util(node.leftNode, space)
+
+        print_2d_util(self.root, 0)
 # Create the binary tree
 tree = BinaryTree("1")
 
@@ -83,3 +100,5 @@ tree.AddLeftChild(tree.root.rightNode, BinaryNode("6"))
 print(tree.Traverse_Inorder())
 print(tree.Traverse_Preorder())
 print(tree.Traverse_Postorder())
+
+tree.print_2d()
