@@ -1,5 +1,5 @@
-from TreeStructure import Tree
-from TreeNode import TreeNode
+from Tree.TreeStructure import Tree
+from Tree.TreeNode import TreeNode
 
 '''
            A

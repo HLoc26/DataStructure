@@ -1,4 +1,4 @@
-from BinaryNode import BinaryNode
+from .BinaryNode import BinaryNode
 class BinaryTree():
     def __init__(self, rootName: str) -> None:
         self.root = BinaryNode(rootName)

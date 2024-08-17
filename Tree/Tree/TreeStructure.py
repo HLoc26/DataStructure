@@ -1,4 +1,4 @@
-from TreeNode import TreeNode
+from .TreeNode import TreeNode
 class Tree():
     def __init__(self, rootName: str) -> None:
         self.root = TreeNode(rootName)

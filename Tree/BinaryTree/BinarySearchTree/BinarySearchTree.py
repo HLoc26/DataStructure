@@ -1,4 +1,4 @@
-from BinaryNode import BinaryNode
+from .BinaryNode import BinaryNode
 COUNT = [10]
 
 class BST():
